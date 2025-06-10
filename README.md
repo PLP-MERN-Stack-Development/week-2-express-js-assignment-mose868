@@ -1,51 +1,138 @@
 [![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-2e0aaae1b6195c2367325f4f02e2d04e9abb55f0b24a779b69b11b9e10269abc.svg)](https://classroom.github.com/online_ide?assignment_repo_id=19746291&assignment_repo_type=AssignmentRepo)
-# Express.js RESTful API Assignment
+# Express.js REST API for Products
 
-This assignment focuses on building a RESTful API using Express.js, implementing proper routing, middleware, and error handling.
+A RESTful API built with Express.js for managing products. This API includes features like authentication, validation, error handling, and more.
 
-## Assignment Overview
+## Features
 
-You will:
-1. Set up an Express.js server
-2. Create RESTful API routes for a product resource
-3. Implement custom middleware for logging, authentication, and validation
-4. Add comprehensive error handling
-5. Develop advanced features like filtering, pagination, and search
-
-## Getting Started
-
-1. Accept the GitHub Classroom assignment invitation
-2. Clone your personal repository that was created by GitHub Classroom
-3. Install dependencies:
-   ```
-   npm install
-   ```
-4. Run the server:
-   ```
-   npm start
-   ```
-
-## Files Included
-
-- `Week2-Assignment.md`: Detailed assignment instructions
-- `server.js`: Starter Express.js server file
-- `.env.example`: Example environment variables file
-
-## Requirements
-
-- Node.js (v18 or higher)
-- npm or yarn
-- Postman, Insomnia, or curl for API testing
+- RESTful API endpoints for CRUD operations on products
+- Authentication middleware
+- Request validation
+- Error handling
+- Request logging
+- Search and filtering
+- Pagination
+- Environment variable configuration
 
 ## API Endpoints
 
-The API will have the following endpoints:
+### Products
 
-- `GET /api/products`: Get all products
-- `GET /api/products/:id`: Get a specific product
-- `POST /api/products`: Create a new product
-- `PUT /api/products/:id`: Update a product
-- `DELETE /api/products/:id`: Delete a product
+- `GET /api/products` - Get all products (with optional filtering, search, and pagination)
+- `GET /api/products/:id` - Get a single product by ID
+- `POST /api/products` - Create a new product
+- `PUT /api/products/:id` - Update a product
+- `DELETE /api/products/:id` - Delete a product
+
+## Authentication
+
+All POST, PUT, and DELETE requests require authentication using the following header:
+```
+Authorization: Bearer secret123
+```
+
+## Query Parameters
+
+### GET /api/products
+
+- `search`: Search products by name
+- `category`: Filter by category
+- `inStock`: Filter by stock status
+- `page`: Page number for pagination
+- `limit`: Number of items per page
+
+## Installation
+
+1. Clone the repository:
+```bash
+git clone <repository-url>
+cd <repository-name>
+```
+
+2. Install dependencies:
+```bash
+npm install
+```
+
+3. Create a `.env` file in the root directory:
+```
+PORT=3000
+```
+
+## Running the Application
+
+Development mode:
+```bash
+npm run dev
+```
+
+Production mode:
+```bash
+npm start
+```
+
+## Project Structure
+
+```
+project/
+├── server.js           (Main application file)
+├── package.json        (Project configuration)
+├── .env               (Environment variables)
+├── routes/
+│   └── products.js    (Product routes)
+├── middleware/
+│   ├── logger.js      (Request logging)
+│   ├── auth.js        (Authentication)
+│   ├── validateProduct.js (Input validation)
+│   └── errorHandler.js (Error handling)
+└── data/
+    └── products.js    (In-memory database)
+```
+
+## Example Requests
+
+### Get all products
+```bash
+curl http://localhost:3000/api/products
+```
+
+### Get a specific product
+```bash
+curl http://localhost:3000/api/products/1
+```
+
+### Create a new product
+```bash
+curl -X POST http://localhost:3000/api/products \
+  -H "Authorization: Bearer secret123" \
+  -H "Content-Type: application/json" \
+  -d '{"name":"New Product","price":99.99}'
+```
+
+### Update a product
+```bash
+curl -X PUT http://localhost:3000/api/products/1 \
+  -H "Authorization: Bearer secret123" \
+  -H "Content-Type: application/json" \
+  -d '{"name":"Updated Product","price":149.99}'
+```
+
+### Delete a product
+```bash
+curl -X DELETE http://localhost:3000/api/products/1 \
+  -H "Authorization: Bearer secret123"
+```
+
+## Technologies Used
+
+- Node.js
+- Express.js
+- dotenv
+- uuid
+
+## License
+
+ISC
 
 ## Submission
 
